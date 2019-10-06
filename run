@@ -1,0 +1,16 @@
+build and run
+--
+docker build -t versed . 
+docker run -d -p 4000:4000 --name versed versed 
+
+bash to running container
+--
+docker exec -t -i versed /bin/bash
+
+stop all
+--
+docker container stop $(docker container ls -aq)
+
+removal all
+--
+docker container rm $(docker container ls -aq)
