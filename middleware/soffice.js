@@ -38,14 +38,15 @@ module.exports = (context, next) => {
 
   // e.g. source: /tmp/tmp-1Ul5PLSfZ8HOi.doc
   // e.g. buffer: file content
-  // source now in file system
+  // e.g. source (tmp file) now in file system
+  // e.g. our case, context.input.buffer, decode64, write to file
   fs.writeFileSync(source, context.input.buffer);
 
   const process = childProcess.spawn('soffice', [
     '--headless',
     '--convert-to',
     context.input.format, // e.g. jpg
-    source, // file in file system
+    source, // the tmp file with content
   ]);
 
   process.stdout.on('data', data => console.log(data.toString()));
