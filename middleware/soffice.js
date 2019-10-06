@@ -20,25 +20,32 @@ module.exports = (context, next) => {
     return next();
   }
 
-  // ?
+  // e.g. /tmp/tmp-1Ul5PLSfZ8HOi.doc
   const source = tmp.tmpNameSync({
-    // get ext
+    // e.g. .doc
     postfix: path.extname(context.input.filename),
   });
 
-  // ?
+  // e.g. tmp-1Ul5PLSfZ8HOi.jpg
   const destination =
+    // only get the basename
     path.basename(source, path.extname(context.input.filename)) +
     '.' +
-    context.input.format;
+    context.input.format; // e.g. jpg
 
+  //test
+  console.log('source', source, 'destination', destination);
+
+  // e.g. source: /tmp/tmp-1Ul5PLSfZ8HOi.doc
+  // e.g. buffer: file content
+  // source now in file system
   fs.writeFileSync(source, context.input.buffer);
 
   const process = childProcess.spawn('soffice', [
     '--headless',
     '--convert-to',
-    context.input.format,
-    source,
+    context.input.format, // e.g. jpg
+    source, // file in file system
   ]);
 
   process.stdout.on('data', data => console.log(data.toString()));
