@@ -1,7 +1,7 @@
 build and run
 --
 docker build -t versed . 
-docker run -d -p 4000:4000 --name versed versed 
+docker run -p 4000:3000 --name versed versed 
 
 bash to running container
 --

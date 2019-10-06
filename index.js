@@ -32,21 +32,28 @@ app.post('/convert', upload.single('file'), function(req, res, next) {
   const mimetype = mime.lookup(req.file.originalname);
   const type = mimetype.split('/')[0]; // e.g. 'text/html' =>  text
 
+  // the format we want it to be
   const localContext = {
     input: {
+      // e.g. jpg
       format: req.body.format,
       filename: req.file.originalname,
       mimetype: mimetype,
+      // e.g. application
       type: type,
-      // req.file, buffer has all entire file
+      // entire file
       buffer: req.file.buffer,
     },
   };
+
+  //test
+  console.log('localContext', localContext);
 
   // run
   middleware.run(
     // context
     localContext,
+    // context pass through, callback
     context => {
       if (context.error) {
         console.error(context.error);

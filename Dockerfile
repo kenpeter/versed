@@ -3,6 +3,10 @@ FROM node:stretch
 RUN apt-get update
 RUN apt-get install libreoffice -y
 RUN apt-get install ffmpeg -y
+RUN apt-get install vim -y
+
+WORKDIR /root
+COPY .vimrc .
 
 WORKDIR /usr/src/app
 

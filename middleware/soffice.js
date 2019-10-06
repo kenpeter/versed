@@ -1,20 +1,32 @@
 'use strict';
 
+// file
 const fs = require('fs');
+// path
 const path = require('path');
+// child
 const childProcess = require('child_process');
+// tmp
+// e.g. /tmp/tmp-xxxx.doc -> /app/tmp-xxxx.jpg
 const tmp = require('tmp');
 
+// clean up
 tmp.setGracefulCleanup();
 
+// 1. context is user input
+// 2. next is the callback
 module.exports = (context, next) => {
   if (context.input.type == 'audio' || context.input.type == 'video') {
     return next();
   }
 
+  // ?
   const source = tmp.tmpNameSync({
+    // get ext
     postfix: path.extname(context.input.filename),
   });
+
+  // ?
   const destination =
     path.basename(source, path.extname(context.input.filename)) +
     '.' +
