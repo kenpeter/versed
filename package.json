@@ -11,7 +11,7 @@
   "dependencies": {
     "body-parser": "1.17.2",
     "express": "4.15.4",
-    "mime": "1.4.0",
+    "mime": "1.4.1",
     "multer": "1.3.0",
     "tmp": "0.0.33"
   }
